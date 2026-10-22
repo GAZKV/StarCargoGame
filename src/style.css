@@ -3,3 +3,14 @@
 @media(max-width:390px){#destination-list{display:grid;grid-template-columns:1fr 1fr}.destination{padding:7px 5px;font-size:.78rem}.controls button{flex:1 1 calc(50% - 8px);padding:8px 6px;font-size:.9rem}.scene-label{font-size:.65rem}#destination-indicator{width:max-content;max-width:min(90vw,calc(100% - 16px));font-size:.7rem}}
 @media(prefers-reduced-motion:no-preference){.destination,#map-panel summary{transition:background-color .16s,border-color .16s,box-shadow .16s}#destination-indicator{animation:soft-glow 2.8s ease-in-out infinite alternate}@keyframes soft-glow{to{box-shadow:0 0 16px #f0ba7055}}details[open] #system-map{animation:map-in .18s ease-out}@keyframes map-in{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* Accesibilidad: no reducir la opacidad del texto/contorno de controles deshabilitados. */
+button:disabled{opacity:1;color:#c6d3d3;background:#182930;border-color:#6d8990}
+.flight-state{border-color:#b88752}
+button,.destination{border-color:#6d8990}
+.panel,.map-panel,details{border-color:#627980}
+.contract-card,.inventory{border-color:#60777d}
+#map-markers{border-color:#71878d}
+summary:after{content:'+';float:right;color:#f0ba70}
+details[open] summary:after{content:'−'}
+button:focus-visible,a:focus-visible,summary:focus-visible,#flight:focus-visible{outline-color:#f0ba70}

@@ -12,7 +12,15 @@
 
 **Mejora semántica verificada:** el botón de crucero/cuántico expone `aria-pressed` según el modo activo, incluso mientras el control está deshabilitado durante la maniobra; el toggle del mapa expone `aria-expanded`. Esta comprobación puntual no constituye una auditoría exhaustiva de accesibilidad.
 
-Playwright de escritorio verificó el recorrido de aceptar encargo, activar modo y tres empujes, salto a staging de 80u, 27 clics a derecha y 28 a izquierda, atraque y entrega: contrato completado, bodega 0, destino 1 y 100 créditos. La ruta `/phaser-fallback.html` cargó; no se rediseñó. No hay pruebas manuales desktop recientes más allá de la evidencia histórica descrita en el resto de este documento.
+### Pase de accesibilidad del cockpit
+
+**Implementado:** los controles tienen etiquetas semánticas y los botones de estado exponen `aria-pressed`; el botón de mapa ofrece `aria-expanded` y `aria-controls`. `#message` y `#station-status` son regiones `polite`; `quantum-state` es texto accesible, pero ya no una región live. Los marcadores del mapa son decorativos (`aria-hidden`) y la posición de la nave también se ofrece en texto. Se corrigieron los símbolos CSS `+`/`−` del disclosure. Al deshabilitar `accept`, `quantum` o `confirm`, y al mostrar el resultado de `deliver`, el foco se transfiere al mensaje correspondiente.
+
+La navegación completa solo con teclado se verificó manualmente en Playwright con teclado real (Tab/Enter): destino Puerto Nadir, aceptar, activar modo, derecha para alinear, esperar estado listo y confirmar salto a staging x=420 (distancia 80); 35 Enter a derecha y 35 a izquierda llevaron a x=503 (distancia 3), seguido de atraque y entrega. El contrato terminó, bodega 0, destino 1, créditos 100 y el foco pasó al mensaje de entrega. El botón del mapa también fue alcanzable por Tab y activado con Enter; quedó `aria-expanded=true`. No se hizo prueba con lector de pantalla; solo se inspeccionó el árbol de accesibilidad.
+
+El muestreo de contraste ejecutado con JavaScript en navegador es **representativo**, no exhaustivo: texto principal sobre el punto más claro del radial 12.35:1; texto de botón 13.47:1; botón seleccionado 13.38:1; texto deshabilitado 9.77:1; borde normal/deshabilitado `#6d8990` contra fondo `#182930` 4.03:1; anillo de foco 9.89:1 contra `#101c21`; texto atenuado 8.96:1; eyebrow 9.47:1 y texto de marcador 13:1. La muestra no prueba todas las combinaciones, niveles de zoom, píxeles ni estados y no acredita conformidad WCAG completa.
+
+Playwright verificó el recorrido completo de teclado descrito arriba. La ruta `/phaser-fallback.html` cargó; no se rediseñó ni se verificó allí el recorrido completo.
 
 Estas comprobaciones no son auditoría exhaustiva de lectores de pantalla, contraste ni rendimiento. No validan acabado visual completo ni alteran el estado general del sprint.
 
@@ -53,11 +61,11 @@ Los valores del bien, cantidad, carga, cambios de stock, recompensa, radio y vel
 
 ### Exploración de interfaz
 
-En navegador en `/`: con misión aceptada, se seleccionó Puerto Nadir, se activó el modo y se aplicaron tres clics de empuje derecho hasta estado listo; la segunda confirmación trasladó a 80u sin atraque. Después se hicieron 30 empujes manuales a derecha y 30 a izquierda, se atracó manualmente con distancia y velocidad válidas y se entregó. Se verificaron bodega 0, stock de destino 1, 100 créditos y contrato completado.
+En navegador en `/`: además del recorrido histórico, el recorrido final completo con teclado real se hizo con Tab/Enter: Puerto Nadir, aceptar, modo, derecha para alinear, esperar `ready`, confirmar salto a staging x=420 (distancia 80), 35 Enter a derecha y 35 a izquierda hasta x=503 (distancia 3), atraque y entrega. Contrato finalizado, bodega 0, destino 1, 100 créditos; el foco pasó al mensaje de entrega. El mapa fue navegable con Tab y Enter y expuso `aria-expanded=true`.
 
 En `/phaser-fallback.html`: se seleccionó Puerto Nadir, se activó el modo y se aplicaron tres clics de empuje derecho hasta `ready`; la segunda confirmación trasladó la nave a posición 421 (80u de staging), sin atraque. **No se probó la entrega completa en el fallback.** El recorrido completo con entrega descrito arriba sí se probó en `/`.
 
-También en `/` se verificaron layout en columna a 360×812 sin recorte horizontal y activación con Enter en el botón de empuje. No es auditoría exhaustiva de lectores de pantalla, contraste ni accesibilidad.
+También en `/` se verificaron layout en columna a 360×812 sin recorte horizontal. La inspección del árbol de accesibilidad no sustituye una prueba con lector de pantalla.
 
 ## Verificación y ejecución
 
@@ -69,8 +77,8 @@ npm run build
 npm run dev -- --host 127.0.0.1 --port 4174 --strictPort
 ```
 
-Resultados actuales: `npm test` pasó (21/21); `npm run build` terminó correctamente con advertencias de chunks mayores de 500 kB (Three.js ~576 kB y Phaser ~1487 kB). La nueva comprobación Playwright móvil está descrita en «Rediseño de la interfaz de vuelo». `git diff --check` queda pendiente de verificación final. No hay pruebas manuales desktop recientes más allá de las históricas documentadas. No es auditoría exhaustiva de contraste/lectores de pantalla ni benchmark. No se afirma que `npm install` haya sido ejecutado.
+Resultados actuales: `npm test` pasó (21/21); `npm run build` terminó correctamente con advertencias de chunks mayores de 500 kB (Three.js ~576 kB y Phaser ~1487 kB). El recorrido completo de teclado real se verificó manualmente en Playwright como se describe arriba. `git diff --check` queda pendiente de verificación final. No se hizo prueba con lector de pantalla ni se afirma conformidad WCAG completa. No se afirma que `npm install` haya sido ejecutado.
 
 ## Fuera de alcance y pendientes
 
-Siguen pendientes comprobar visualmente la nave como objeto 3D, un segundo planeta, varios encuadres/viewports, accesibilidad/contraste y benchmark. El incremento no implementa persistencia, combustible, viajes intersistema ni controles/perfil definitivos. Los demás aspectos permanecen sujetos al [README](../README.md) y a las preguntas abiertas de [decisiones](decisiones.md). No se afirma que el sprint esté cerrado.
+Siguen pendientes comprobar visualmente la nave como objeto 3D, un segundo planeta, varios encuadres/viewports, una prueba con lector de pantalla y benchmark. El pase de contraste reportado es representativo, no exhaustivo. El incremento no implementa persistencia, combustible, viajes intersistema ni controles/perfil definitivos. Los demás aspectos permanecen sujetos al [README](../README.md) y a las preguntas abiertas de [decisiones](decisiones.md). No se afirma que el sprint esté cerrado ni conformidad total WCAG.
