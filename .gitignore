@@ -1,0 +1,18 @@
+# Archivos locales y salidas generadas (ampliar al elegir el motor)
+.env
+.env.*
+!.env.example
+*.log
+node_modules/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+.godot/
+.import/
+.mono/
+[Bb]in/
+[Oo]bj/
+[Ll]ibrary/
+[Tt]emp/
+[Bb]uilds/

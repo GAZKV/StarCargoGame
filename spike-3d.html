@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="es"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="theme-color" content="#0b1320"/><title>Spike 3D — StarCargoGame</title></head>
+<body><main class="layout"><header><p class="eyebrow">Experimento visual independiente</p><h1>Nave y puerto · Three.js</h1><p>Modelo neutro temporal; no es arte final ni forma parte de la demo Phaser.</p></header>
+<section class="stage" aria-label="Vista 3D de nave y estación"><canvas id="viewport" tabindex="0" aria-label="Nave tridimensional aproximándose visualmente a un puerto. Enfoca esta vista para controlarla con las flechas." role="img"></canvas><div id="failure" class="failure" role="alert" hidden></div></section>
+<section class="controls" aria-label="Controles provisionales"><div class="controls-head"><h2>Controles de prueba</h2><button id="restart" type="button">Reiniciar experimento</button></div>
+<p>Traslación y giro provisionales de demostración; no son física final. Usa ←/→ para girar y ↑/↓ para aproximar o alejar.</p>
+<div class="control-grid"><button data-action="turn-left" aria-label="Girar a la izquierda">↶ Girar</button><button data-action="forward" aria-label="Aproximar al puerto">↑ Aproximar</button><button data-action="backward" aria-label="Alejar del puerto">↓ Alejar</button><button data-action="turn-right" aria-label="Girar a la derecha">Girar ↷</button></div>
+<p id="status" class="status" role="status" aria-live="polite">Cargando modelo 3D…</p><p class="distance">Distancia visual al marcador: <output id="distance">—</output></p></section></main><style>#viewport:focus-visible{outline:3px solid #72e1d2;outline-offset:-4px}</style><script type="module" src="/src/spike3d/main.ts"></script></body></html>

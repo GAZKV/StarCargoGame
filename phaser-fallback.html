@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="es">
+  <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>StarCargo · Respaldo visual 2D</title></head>
+  <body><div id="app">
+    <header><p>STAR CARGO / RESPALDO VISUAL 2D</p><h1>Pilotaje Phaser</h1><p>Vista 2D de respaldo; no es arte equivalente a Three.js. Los parámetros visibles del recorrido son fixtures provisionales.</p><a href="/">Volver a la vista principal</a></header>
+    <main><section><div id="game" tabindex="0" aria-label="Mapa 2D del sistema. Enfoca y usa las flechas para pilotar; usa Tab para los controles."></div><nav id="destinations" aria-label="Seleccionar estación de destino"></nav>
+      <p id="message" role="status" aria-live="polite"></p><p id="flight"></p>
+      <p id="quantum-state" aria-live="polite"></p><div class="controls" aria-label="Controles de pilotaje"><button data-vector="0,-1">↑ Arriba</button><button data-vector="-1,0">← Izquierda</button><button data-vector="0,1">↓ Abajo</button><button data-vector="1,0">→ Derecha</button><button id="quantum">Activar crucero / cuántico</button><button id="confirm">Segunda confirmación de salto</button><button id="dock">Solicitar atraque</button></div>
+      <p>También puedes mantener las flechas del teclado. La nave conserva inercia; empuja en sentido contrario para frenar.</p>
+    </section><aside><h2 id="station">Estación</h2><p id="offer"></p><p id="cargo"></p><button id="accept">Aceptar contrato</button> <button id="deliver">Entregar contrato</button><p id="inventory"></p><p id="credits"></p></aside></main>
+  </div><script type="module" src="/src/legacy/main.ts"></script></body>
+</html>
